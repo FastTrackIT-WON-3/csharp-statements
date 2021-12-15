@@ -7,6 +7,132 @@ namespace CSharpStatements
         static void Main(string[] args)
         {
             string level1Option = PrintMenuAndReturnOption(
+                 "Please select an option:",
+                 new string[]
+                 {
+                    "1|File",
+                    "2|Edit",
+                    "3|View"
+                 });
+
+            switch (level1Option)
+            {
+                case "1":
+                case "file":
+                    {
+                        string level2Option = PrintMenuAndReturnOption(
+                            "Please select a sub-option:",
+                            new string[]
+                            {
+                            "1.1|New",
+                            "1.2|Open",
+                            "1.3|Save"
+                            });
+
+                        switch (level2Option)
+                        {
+                            case "1.1":
+                            case "new":
+                                Console.WriteLine("You have selected File / New");
+                                break;
+
+                            case "1.2":
+                            case "open":
+                                Console.WriteLine("You have selected File / Open");
+                                break;
+
+                            case "1.3":
+                            case "save":
+                                Console.WriteLine("You have selected File / Save");
+                                break;
+                        }
+                    }
+                    break;
+
+                case "2":
+                case "edit":
+                    {
+                        string level2Option = PrintMenuAndReturnOption(
+                            "Please select a sub-option:",
+                            new string[]
+                            {
+                                "2.1|Cut",
+                                "2.2|Copy",
+                                "2.3|Paste"
+                            });
+
+                        switch (level2Option)
+                        {
+                            case "2.1":
+                            case "cut":
+                                Console.WriteLine("You have selected Edit / Cut");
+                                break;
+
+                            case "2.2":
+                            case "copy":
+                                Console.WriteLine("You have selected Edit / Copy");
+                                break;
+
+                            case "2.3":
+                            case "paste":
+                                Console.WriteLine("You have selected Edit / Paste");
+                                break;
+                        }
+                    }
+                    break;
+
+                case "3":
+                case "view":
+                    {
+                        string level2Option = PrintMenuAndReturnOption(
+                            "Please select a sub-option:",
+                            new string[]
+                            {
+                                "3.1|Solution Explorer",
+                                "3.2|Git Changes",
+                                "3.3|Cloud Explorer"
+                            });
+
+                        switch (level2Option)
+                        {
+                            case "3.1":
+                            case "solution explorer":
+                                Console.WriteLine("You have selected View / Solution Explorer");
+                                break;
+
+                            case "3.2":
+                            case "git changes":
+                                Console.WriteLine("You have selected View / Git Changes");
+                                break;
+
+                            case "3.3":
+                            case "cloud explorer":
+                                Console.WriteLine("You have selected View / Cloud Explorer");
+                                break;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        static void If_SimpleExample()
+        {
+            Random randomizer = new Random();
+            int i = randomizer.Next(0, 100);
+
+            if (i % 2 == 0)
+            {
+                Console.WriteLine($"{i} is Even");
+            }
+            else
+            {
+                Console.WriteLine($"{i} is Odd");
+            }
+        }
+
+        static void If_ExerciseWithComplexMenu()
+        {
+            string level1Option = PrintMenuAndReturnOption(
                 "Please select an option:",
                 new string[]
                 {
@@ -101,21 +227,6 @@ namespace CSharpStatements
                 {
                     Console.WriteLine("You have selected View / Cloud Explorer");
                 }
-            }
-        }
-
-        static void If_SimpleExample()
-        {
-            Random randomizer = new Random();
-            int i = randomizer.Next(0, 100);
-
-            if (i % 2 == 0)
-            {
-                Console.WriteLine($"{i} is Even");
-            }
-            else
-            {
-                Console.WriteLine($"{i} is Odd");
             }
         }
 
