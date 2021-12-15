@@ -6,38 +6,30 @@ namespace CSharpStatements
     {
         static void Main(string[] args)
         {
-            int n = ReadNumber("How many elements has the vector? ");
-            int[] array = new int[n];
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = ReadNumber($"Element at index {i}=");
-            }
+            string correctUsername = "admin";
+            string correctPassword = "1234";
 
-            // print elements in order
-            Console.WriteLine();
-            Console.Write("Elements in order: ");
-            for (int i = 0; i < array.Length; i++)
+            bool isAuthenticated = false;
+            while (!isAuthenticated)
             {
-                Console.Write($"{array[i]}, ");
-            }
+                Console.Write("Username=");
+                string actualUsername = Console.ReadLine();
 
-            // print elements in reverse order
-            Console.WriteLine();
-            Console.Write("Elements in reverse order: ");
-            for (int i = array.Length - 1; i >= 0 ; i--)
-            {
-                Console.Write($"{array[i]}, ");
-            }
+                Console.Write("Password=");
+                string actualPassword = Console.ReadLine();
 
-            // print sum of elements
-            Console.WriteLine();
-            Console.Write("Sum of elements: ");
-            int sum = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                sum += array[i];
+                isAuthenticated = string.Equals(actualUsername, correctUsername, StringComparison.Ordinal) &&
+                                        string.Equals(actualPassword, correctPassword, StringComparison.Ordinal);
+
+                if (isAuthenticated)
+                {
+                    Console.WriteLine($"Wellcome {actualUsername}!");
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong username and/or password, please try again!");
+                }
             }
-            Console.Write(sum);
         }
 
         static void If_SimpleExample()
@@ -288,6 +280,42 @@ namespace CSharpStatements
 
                 Console.WriteLine(i);
             }
+        }
+
+        static void For_ExerciseWithArray()
+        {
+            int n = ReadNumber("How many elements has the vector? ");
+            int[] array = new int[n];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = ReadNumber($"Element at index {i}=");
+            }
+
+            // print elements in order
+            Console.WriteLine();
+            Console.Write("Elements in order: ");
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"{array[i]}, ");
+            }
+
+            // print elements in reverse order
+            Console.WriteLine();
+            Console.Write("Elements in reverse order: ");
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                Console.Write($"{array[i]}, ");
+            }
+
+            // print sum of elements
+            Console.WriteLine();
+            Console.Write("Sum of elements: ");
+            int sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            Console.Write(sum);
         }
 
         static string PrintMenuAndReturnOption(string label, string[] options)
