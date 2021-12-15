@@ -6,23 +6,27 @@ namespace CSharpStatements
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please select an option:");
-            Console.WriteLine("1. File");
-            Console.WriteLine("2. Edit");
-            Console.WriteLine("3. View");
-            Console.Write("Your option is:");
-            string level1Option = Console.ReadLine();
+            string level1Option = PrintMenuAndReturnOption(
+                "Please select an option:",
+                new string[]
+                {
+                    "1|File",
+                    "2|Edit",
+                    "3|View"
+                });
 
             if (string.Equals(level1Option, "1", StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(level1Option, "file", StringComparison.OrdinalIgnoreCase))
             {
                 // TODO: generate File sub-options
-                Console.WriteLine("Please select a sub-option:");
-                Console.WriteLine("1.1 New");
-                Console.WriteLine("1.2 Open");
-                Console.WriteLine("1.3 Save");
-                Console.Write("Your option is:");
-                string level2Option = Console.ReadLine();
+                string level2Option = PrintMenuAndReturnOption(
+                    "Please select a sub-option:",
+                    new string[]
+                    {
+                        "1.1|New",
+                        "1.2|Open",
+                        "1.3|Save"
+                    });
 
                 if (string.Equals(level2Option, "1.1", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(level2Option, "new", StringComparison.OrdinalIgnoreCase))
@@ -39,22 +43,20 @@ namespace CSharpStatements
                 {
                     Console.WriteLine("You have selected File / Save");
                 }
-                else
-                {
-                    Console.Write($"Your option '{level2Option}' is not valid");
-                }
             }
             else if (string.Equals(level1Option, "2", StringComparison.OrdinalIgnoreCase) ||
                      string.Equals(level1Option, "edit", StringComparison.OrdinalIgnoreCase))
             {
                 // TODO: generate Edit sub-options
-                Console.WriteLine("Please select a sub-option:");
-                Console.WriteLine("2.1 Cut");
-                Console.WriteLine("2.2 Copy");
-                Console.WriteLine("2.3 Paste");
-                Console.Write("Your option is:");
-                string level2Option = Console.ReadLine();
-                
+                string level2Option = PrintMenuAndReturnOption(
+                    "Please select a sub-option:",
+                    new string[]
+                    {
+                        "2.1|Cut",
+                        "2.2|Copy",
+                        "2.3|Paste"
+                    });
+
                 if (string.Equals(level2Option, "2.1", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(level2Option, "cut", StringComparison.OrdinalIgnoreCase))
                 {
@@ -70,21 +72,19 @@ namespace CSharpStatements
                 {
                     Console.WriteLine("You have selected Edit / Paste");
                 }
-                else
-                {
-                    Console.Write($"Your option '{level2Option}' is not valid");
-                }
             }
             else if (string.Equals(level1Option, "3", StringComparison.OrdinalIgnoreCase) ||
                      string.Equals(level1Option, "view", StringComparison.OrdinalIgnoreCase))
             {
                 // TODO: generate View sub-options
-                Console.WriteLine("Please select a sub-option:");
-                Console.WriteLine("3.1 Solution Explorer");
-                Console.WriteLine("3.2 Git Changes");
-                Console.WriteLine("3.3 Cloud Explorer");
-                Console.Write("Your option is:");
-                string level2Option = Console.ReadLine();
+                string level2Option = PrintMenuAndReturnOption(
+                    "Please select a sub-option:",
+                    new string[]
+                    {
+                        "3.1|Solution Explorer",
+                        "3.2|Git Changes",
+                        "3.3|Cloud Explorer"
+                    });
 
                 if (string.Equals(level2Option, "3.1", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(level2Option, "solution explorer", StringComparison.OrdinalIgnoreCase))
@@ -101,14 +101,6 @@ namespace CSharpStatements
                 {
                     Console.WriteLine("You have selected View / Cloud Explorer");
                 }
-                else
-                {
-                    Console.Write($"Your option '{level2Option}' is not valid");
-                }
-            }
-            else
-            {
-                Console.Write($"Your option '{level1Option}' is not valid");
             }
         }
 
@@ -125,6 +117,50 @@ namespace CSharpStatements
             {
                 Console.WriteLine($"{i} is Odd");
             }
+        }
+
+        static string PrintMenuAndReturnOption(string label, string[] options)
+        {
+            bool isOptionCorrect = false;
+            string answer = string.Empty;
+
+            while (!isOptionCorrect)
+            {
+                Console.WriteLine(label);
+                for (int i = 0; i < options.Length; i++)
+                {
+                    string[] parts = options[i].Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                    string optionNumber = parts[0];
+                    string optionText = parts[1];
+                    Console.WriteLine($"{optionNumber} {optionText}");
+                }
+
+                Console.Write("Your option is:");
+                answer = Console.ReadLine();
+
+                // validate if answer is between the presented options
+                for (int i = 0; i < options.Length; i++)
+                {
+                    string[] parts = options[i].Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                    string optionNumber = parts[0];
+                    string optionText = parts[1];
+
+                    isOptionCorrect = string.Equals(answer, optionNumber, StringComparison.OrdinalIgnoreCase) ||
+                                      string.Equals(answer, optionText, StringComparison.OrdinalIgnoreCase);
+
+                    if (isOptionCorrect)
+                    {
+                        break;
+                    }
+                }
+
+                if (!isOptionCorrect)
+                {
+                    Console.WriteLine($"Your option '{answer}' is not valid, please try again ...");
+                }
+            }
+
+            return answer;
         }
     }
 }
