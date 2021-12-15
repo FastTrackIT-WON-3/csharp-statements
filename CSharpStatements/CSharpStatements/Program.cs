@@ -6,26 +6,38 @@ namespace CSharpStatements
     {
         static void Main(string[] args)
         {
-            int n = ReadNumber("N=");
-
-            for (int i = 0; i <= n; i++)
+            int n = ReadNumber("How many elements has the vector? ");
+            int[] array = new int[n];
+            for (int i = 0; i < array.Length; i++)
             {
-                if (i % 2 != 0)
-                {
-                    continue;
-                }
-
-                if (i > 10)
-                {
-                    int shouldCotinue = ReadNumber("Mai continuati? 0=NU, 1=DA ");
-                    if (shouldCotinue == 0)
-                    {
-                        break;
-                    }
-                }
-
-                Console.WriteLine(i);
+                array[i] = ReadNumber($"Element at index {i}=");
             }
+
+            // print elements in order
+            Console.WriteLine();
+            Console.Write("Elements in order: ");
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"{array[i]}, ");
+            }
+
+            // print elements in reverse order
+            Console.WriteLine();
+            Console.Write("Elements in reverse order: ");
+            for (int i = array.Length - 1; i >= 0 ; i--)
+            {
+                Console.Write($"{array[i]}, ");
+            }
+
+            // print sum of elements
+            Console.WriteLine();
+            Console.Write("Sum of elements: ");
+            int sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            Console.Write(sum);
         }
 
         static void If_SimpleExample()
@@ -251,6 +263,30 @@ namespace CSharpStatements
                         }
                     }
                     break;
+            }
+        }
+
+        static void For_PrintAllEvenNumbersTill()
+        {
+            int n = ReadNumber("N=");
+
+            for (int i = 0; i <= n; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    continue;
+                }
+
+                if (i > 10)
+                {
+                    int shouldCotinue = ReadNumber("Mai continuati? 0=NU, 1=DA ");
+                    if (shouldCotinue == 0)
+                    {
+                        break;
+                    }
+                }
+
+                Console.WriteLine(i);
             }
         }
 
