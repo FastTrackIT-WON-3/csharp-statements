@@ -9,8 +9,8 @@ namespace CSharpStatements
             string correctUsername = "admin";
             string correctPassword = "1234";
 
-            bool isAuthenticated = false;
-            while (!isAuthenticated)
+            bool isAuthenticated;
+            do
             {
                 Console.Write("Username=");
                 string actualUsername = Console.ReadLine();
@@ -30,6 +30,7 @@ namespace CSharpStatements
                     Console.WriteLine($"Wrong username and/or password, please try again!");
                 }
             }
+            while (!isAuthenticated);
         }
 
         static void If_SimpleExample()
@@ -316,6 +317,34 @@ namespace CSharpStatements
                 sum += array[i];
             }
             Console.Write(sum);
+        }
+
+        static void While_PrimitiveAuthenticationSystem()
+        {
+            string correctUsername = "admin";
+            string correctPassword = "1234";
+
+            bool isAuthenticated = false;
+            while (!isAuthenticated)
+            {
+                Console.Write("Username=");
+                string actualUsername = Console.ReadLine();
+
+                Console.Write("Password=");
+                string actualPassword = Console.ReadLine();
+
+                isAuthenticated = string.Equals(actualUsername, correctUsername, StringComparison.Ordinal) &&
+                                        string.Equals(actualPassword, correctPassword, StringComparison.Ordinal);
+
+                if (isAuthenticated)
+                {
+                    Console.WriteLine($"Wellcome {actualUsername}!");
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong username and/or password, please try again!");
+                }
+            }
         }
 
         static string PrintMenuAndReturnOption(string label, string[] options)
